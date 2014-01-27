@@ -3,5 +3,5 @@
 
 
 ### Dependências
-1. texlive2013
-  *. abntex2
+- texlive2013
+- abntex2
