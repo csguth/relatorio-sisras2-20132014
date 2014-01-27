@@ -4,4 +4,4 @@
 
 ### Dependências
 1. texlive2013
-..1. abntex2
+  *. abntex2
