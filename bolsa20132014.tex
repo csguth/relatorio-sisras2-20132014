@@ -242,7 +242,7 @@ Este documento relata as atividades realizadas pelo bolsista Chrystian de Sousa 
 
 Conforme previsto no plano de trabalho da bolsa, entre Junho de 2013 e Janeiro de 2014 o bolsista realizou um estudo para compreensão das técnicas de análise de \textit{timing} estática (\textit{STA: Static Timing Analysis}) aplicadas no contexto de uma ferramenta de otimização para fluxo industrial.
 
-Nos primeiros meses (entre Junho e Setembro de 2013), o aluno desenvolveu uma ferramenta de STA utilizando a infraestrutura disponibilizada pela competição de \textit{sizing} discreto do ISPD 2013 \cite{Contest2013}, que levava em consideração o atraso das interconexões e a degradação do \textit{slew} através destas. Posteriormente, entre Outubro e Novembro de 2013, foram realizados experimentos a fim de validar a ferramenta, a qual foi documentada na forma de uma monografia de conclusão de curso, apresentada no presente trabalho na Seção \ref{sec:tcc}. Finalmente, entre Dezembro de 2013 e Janeiro de 2014, a infraestrutura implementada até então começou a ser incorporada à uma técnica de otimização para fluxo \textit{Standard Cell} conhecida como \textit{gate sizing}.
+Nos primeiros meses (entre Junho e Setembro de 2013), o aluno desenvolveu uma ferramenta de STA utilizando a infraestrutura disponibilizada pela competição de \textit{sizing} discreto do ISPD 2013 \cite{Contest2013}, que levava em consideração o atraso das interconexões e a degradação do \textit{slew} através destas. Posteriormente, entre Outubro e Novembro de 2013, foram realizados experimentos a fim de validar a ferramenta, a qual foi documentada na forma de uma monografia de conclusão de curso, apresentada no presente trabalho na \autoref{sec:tcc}. Finalmente, entre Dezembro de 2013 e Janeiro de 2014, a infraestrutura implementada até então começou a ser incorporada à uma técnica de otimização para fluxo \textit{Standard Cell} conhecida como \textit{gate sizing}.
 
 \begin{center}
 \textit{\textbf{Palavras-chave:} automação de projeto eletrônico, biblioteca standard cell, análise de timing estática, complementary metal-oxide semiconductor, gate sizing.}
@@ -271,20 +271,20 @@ A técnica para cálculo do atraso das características temporais das interconex
 \section{Experimentos Desenvolvidos, Resultados e Discussões}
 
 \subsection{Definição do Modelo de Grafo do Circuito}
-Para que a análise de \textit{timing} seja realizada, é necessário primeiramente, definir um modelo de grafo para representar o circuito. O modelo de grafo escolhido representa os \textit{Timing Points} no conjunto de vértices e os \textit{Timing Arcs} e interconexões no conjunto das arestas (Figura \ref{fig:grafo_timing_points}). Também são criados vértices especiais, chamados \textit{fonte} e \textit{terminal}. Estes nodos são inseridos no início e no fim do grafo, para que o mesmo possua apenas um ponto de ``entrada'', e um ponto de ``saída''.
+Para que a análise de \textit{timing} seja realizada, é necessário primeiramente, definir um modelo de grafo para representar o circuito. O modelo de grafo escolhido representa os \textit{Timing Points} no conjunto de vértices e os \textit{Timing Arcs} e interconexões no conjunto das arestas (\autoref{fig:grafo_timing_points}). Também são criados vértices especiais, chamados \textit{fonte} e \textit{terminal}. Estes nodos são inseridos no início e no fim do grafo, para que o mesmo possua apenas um ponto de ``entrada'', e um ponto de ``saída''.
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[width=\linewidth]{img/grafo_timing_points.pdf} 
-\caption{Grafo de \textit{timing} com representação dos \textit{timing points}, \textit{timing arcs} e interconexões.}
-\label{fig:grafo_timing_points}
+\caption{\label{fig:grafo_timing_points}Grafo de \textit{timing} com representação dos \textit{timing points}, \textit{timing arcs} e interconexões.}
+\includegraphics[width=\linewidth]{img/grafo_timing_points.pdf}
+\legend{Fonte: o autor.}
 \end{center}
 \end{figure}
 
 
 
 \subsection{Representação das Interconexões}
-As interconexões mais complexas devem ser representadas levando em consideração suas características resistivas e capacitivas. Essas então, são modeladas como árvores RC (Figura \ref{fig:rc}), que conforme \citeonline{Rabaey08}, têm as seguintes características: 
+As interconexões mais complexas devem ser representadas levando em consideração suas características resistivas e capacitivas. Essas então, são modeladas como árvores RC (\autoref{fig:rc}), que conforme \citeonline{Rabaey08}, têm as seguintes características: 
 
 \begin{itemize}
 \item A rede tem apenas um nodo de entrada, chamado de \textbf{fonte} (\textit{source});
@@ -294,9 +294,9 @@ As interconexões mais complexas devem ser representadas levando em consideraç�
 
 \begin{figure}[ht]
 \begin{center}
+\caption{\label{fig:rc}Um circuito composto por três portas lógicas (\textit{u1, u2 e u3}), uma célula sequencial (\textit{f1}) e uma interconexão em forma de árvore RC, que liga a saída de \textit{u1} às entradas de \textit{u2, u3 e f1}. A interconexão em questão possui 5 capacitores (\textit{C0 (fonte), C1, C2, C3 e C4}) e 4 resistores (\textit{R1, R2, R3 e R4}).}
 \includegraphics[width=0.7 \linewidth]{img/rc.pdf} 
-\caption{Um circuito composto por três portas lógicas (\textit{u1, u2 e u3}), uma célula sequencial (\textit{f1}) e uma interconexão em forma de árvore RC, que liga a saída de \textit{u1} às entradas de \textit{u2, u3 e f1}. A interconexão em questão possui 5 capacitores (\textit{C0 (fonte), C1, C2, C3 e C4}) e 4 resistores (\textit{R1, R2, R3 e R4}).}
-\label{fig:rc}
+\legend{Fonte: o autor.}
 \end{center}
 \end{figure}
 
@@ -305,11 +305,13 @@ As interconexões mais complexas devem ser representadas levando em consideraç�
 \citeonline{Kashyap00} propuseram uma técnica para calcular o atraso da interconexão levando em conta o efeito de \textit{resistive shielding}. Com a mesma complexidade da técnica de Elmore, a técnica proposta para cálculo de atraso em uma árvore RC calcula também o valor de capacitância efetiva. Porém, \citeonline{Kashyap00} não consideravam o \textit{driver} da interconexão como sendo uma porta lógica \textit{CMOS}. Como consequência, sua aproximação para o \textit{slew} na entrada da árvore RC era imprecisa. Como o cálculo da capacitância efetiva de uma árvore depende do \textit{slew} que incide nesta, e o \textit{slew} depende da capacitância vista pelo \textit{driver}, \citeonline{PURI02} propuseram uma técnica que leva em consideração o impacto da capacitância no \textit{slew} do driver, e também, do \textit{slew} no cálculo da capacitância efetiva. Esta técnica foi implementada na ferramenta desenvolvida, e foi validada frente a uma ferramenta industrial.
 
 \subsection{Cálculo do Atraso das Portas Lógicas}
-Nas bibliotecas \textit{standard cell} atuais, modelos de atrasos não-lineares\footnote{Conhecidos na indústria por \textit{NLDM} (\textit{Non-Linear Delay Model})} são fornecidos para os \textit{timing arcs} das células disponíveis. Esses modelos, que geralmente são obtidos através de simulações em nível elétrico, são armazenados na forma de \textit{lookup tables}, como a da Figura \ref{fig:lookup_table}. Uma \textit{lookup table} descreve o \textit{delay} ou o \textit{slew} de uma célula em função de dois fatores: o \textit{slew} na entrada do \textit{timing arc} (colunas), e a capacitância de saída (\textit{load}) (linhas).
+Nas bibliotecas \textit{standard cell} atuais, modelos de atrasos não-lineares\footnote{Conhecidos na indústria por \textit{NLDM} (\textit{Non-Linear Delay Model})} são fornecidos para os \textit{timing arcs} das células disponíveis. Esses modelos, que geralmente são obtidos através de simulações em nível elétrico, são armazenados na forma de \textit{lookup tables}, como a da \autoref{fig:lookup_table}. Uma \textit{lookup table} descreve o \textit{delay} ou o \textit{slew} de uma célula em função de dois fatores: o \textit{slew} na entrada do \textit{timing arc} (colunas), e a capacitância de saída (\textit{load}) (linhas).
 
-Utilizando a \textit{lookup table} da Figura \ref{fig:lookup_table} para estimar o \textit{delay} de um dos \textit{timing arcs} de uma célula \textit{CMOS} e supondo que o \textit{slew} na entrada deste \textit{timing arc} seja de $8.0$, e a capacitância vista na saída seja $0.1$, obtém-se que $delay = 3.49$, pois $3.49$ é o valor endereçado pelos índices da função (\textit{slew} e \textit{load}). Caso os valores de \textit{slew} ou \textit{load} não existam na tabela, uma interpolação linear é realizada. Da mesma forma, o cálculo do \textit{slew} do \textit{timing arc} é realizado com base na \textit{lookup table} específica para o \textit{slew}.
+Utilizando a \textit{lookup table} da \autoref{fig:lookup_table} para estimar o \textit{delay} de um dos \textit{timing arcs} de uma célula \textit{CMOS} e supondo que o \textit{slew} na entrada deste \textit{timing arc} seja de $8.0$, e a capacitância vista na saída seja $0.1$, obtém-se que $delay = 3.49$, pois $3.49$ é o valor endereçado pelos índices da função (\textit{slew} e \textit{load}). Caso os valores de \textit{slew} ou \textit{load} não existam na tabela, uma interpolação linear é realizada. Da mesma forma, o cálculo do \textit{slew} do \textit{timing arc} é realizado com base na \textit{lookup table} específica para o \textit{slew}.
 
 \begin{figure}[ht]
+\caption{\label{fig:lookup_table}Uma \textit{lookup table} para atraso de subida (\textit{rise delay}) de um arco de \textit{timing}. As linhas são endereçadas por \textit{load} (capacitância de saída da porta lógica) e as colunas por \textit{input slew} (\textit{slew} aplicado na entrada do \textit{timing arc}). }
+\begin{center}
 \lstset{basicstyle=\footnotesize}
 \begin{lstlisting}[frame=single]
 rise_delay (delay_table) {
@@ -325,9 +327,11 @@ rise_delay (delay_table) {
    17.83, 18.48, 19.00, 19.78, 21.34, 22.90, 25.50, 30.70
   );
 }
+
 \end{lstlisting}
-\caption{Uma \textit{lookup table} para atraso de subida (\textit{rise delay}) de um arco de \textit{timing}. As linhas são endereçadas por \textit{load} (capacitância de saída da porta lógica) e as colunas por \textit{input slew} (\textit{slew} aplicado na entrada do \textit{timing arc}). Adaptada de \cite{Contest2013}.}
-\label{fig:lookup_table}
+\end{center}
+
+\legend{Adaptada de \cite{Contest2013}.}
 \end{figure}
 
 
@@ -336,13 +340,14 @@ rise_delay (delay_table) {
 
 \begin{figure}[ht]
 \begin{center}
+\caption{\label{fig:grafo_lista_nivel_logico}Na lista ordenada, observando o elemento \textit{u1:o}, os elementos de menor ou de igual  nível lógico (\textit{fonte, inp1, inp2, f1:q, u1:a, u1:b, u2:a}) se encontram à esquerda, e os de maior ou igual (\textit{u2:o, f1:d, out, terminal}) se encontram à direita.}
 \includegraphics[width=\linewidth]{img/grafo_lista_nivel_logico.pdf} 
-\caption{Na lista ordenada, observando o elemento \textit{u1:o}, os elementos de menor ou de igual  nível lógico (\textit{fonte, inp1, inp2, f1:q, u1:a, u1:b, u2:a}) se encontram à esquerda, e os de maior ou igual (\textit{u2:o, f1:d, out, terminal}) se encontram à direita.}
-\label{fig:grafo_lista_nivel_logico}
+\legend{Fonte: O autor.}
+
 \end{center}
 \end{figure}
 
-O algoritmo de STA é baseado nas técnicas conhecidas como PERT/CPM \cite{BhaskerChadha09}. Para melhorar o desempenho da técnica, foram adotadas estruturas de dados mais otimizadas para armazenar o grafo: ao guardar os dados do grafo em listas ordenadas topologicamente (Figura \ref{fig:grafo_lista_nivel_logico}), o algoritmo passa a ser apenas uma varredura em cada item da lista, atualizando as informações temporais previamente calculadas. Assim, não é mais necessário o uso da fila da técnica PERT/CPM.
+O algoritmo de STA é baseado nas técnicas conhecidas como PERT/CPM \cite{BhaskerChadha09}. Para melhorar o desempenho da técnica, foram adotadas estruturas de dados mais otimizadas para armazenar o grafo: ao guardar os dados do grafo em listas ordenadas topologicamente (\autoref{fig:grafo_lista_nivel_logico}), o algoritmo passa a ser apenas uma varredura em cada item da lista, atualizando as informações temporais previamente calculadas. Assim, não é mais necessário o uso da fila da técnica PERT/CPM.
 
 \subsection{O Trabalho de Conclusão de Curso Gerado}
 \label{sec:tcc}
@@ -353,7 +358,7 @@ O trabalho desenvolvido gerou a monografia de conclusão de curso intitulada ``A
 
 Para realizar a avaliação das técnicas abordadas neste trabalho, uma ferramenta para análise de \textit{timing} na linguagem de programação C++ foi implementada. A ferramenta realiza a análise de \textit{timing} e considera dois possíveis modelos de interconexão: o modelo da capacitância concentrada e o modelo RC concentrado.
 
-Como parte dos experimentos é realizada comparando as informações calculadas pela ferramenta implementada com as informações reportadas pelo \textit{PrimeTime}, o erro percentual ($EP_t$) e o erro médio percentual absoluto ($EMPA$) (Equações \ref{eq:ep} e \ref{eq:empa}) foram adotados como métricas para estimar a qualidade das informações de \textit{timing} reportadas pela ferramenta implementada neste trabalho.
+Como parte dos experimentos é realizada comparando as informações calculadas pela ferramenta implementada com as informações reportadas pelo \textit{PrimeTime}, o erro percentual ($EP_t$) e o erro médio percentual absoluto ($EMPA$) (\autoref{eq:ep} e \autoref{eq:empa}) foram adotados como métricas para estimar a qualidade das informações de \textit{timing} reportadas pela ferramenta implementada neste trabalho.
 
 \begin{equation}
 \label{eq:ep}
@@ -365,7 +370,7 @@ EP_t = \frac{(A_t - P_t)}{A_t} \times 100
 EMPA = \frac{\sum_{t=1}^n |EP_t|}{n}
 \end{equation}
 
-O erro percentual é calculado para cada uma das informações comparadas com o \textit{PrimeTime} utilizando a equação \ref{eq:ep}, sendo que $A_t$ é a informação obtida pelo \textit{PrimeTime} e $P_t$ é a informação calculada pela ferramenta implementada. Tais informações usadas para fim de validação da ferramenta foram:
+O erro percentual é calculado para cada uma das informações comparadas com o \textit{PrimeTime} utilizando a \autoref{eq:ep}, sendo que $A_t$ é a informação obtida pelo \textit{PrimeTime} e $P_t$ é a informação calculada pela ferramenta implementada. Tais informações usadas para fim de validação da ferramenta foram:
 
 \begin{itemize}
 \item \textbf{\textit{TNS (Total Negative Slack)}: } O somatório de \textit{slack} negativo nas saídas primárias.
